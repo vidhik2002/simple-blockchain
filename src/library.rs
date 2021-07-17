@@ -107,4 +107,28 @@ impl Chain {
         self.chain.push(block);
         true
     }
+
+    fn get_merkle(current_transaction: Vec<Transaction>) -> String {
+        let mut merkle = Vec::new();
+
+        for i in &current_transaction {
+            let hash = Chain::hash(i);
+            merkle.push(hash);
+        }
+        //odd merkle length
+        if merkle.len() % 2 == 1 {
+            let last_one = merkle.last().cloned().unwrap();//cloning the last hash
+        }
+
+        if merkle.len() > 1{
+            //removing the last 2 hashes
+            let mut hl = merkle.remove(0);
+            let mut hll = merkle.remove(0);
+            hl.push_str(&mut h2);
+            let new_hash = Chain::hash(&hl);
+            merkle.push(new_hash);
+        }
+        merkle.pop().unwrap();
+    }
+
 }
