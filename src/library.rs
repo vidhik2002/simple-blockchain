@@ -131,4 +131,24 @@ impl Chain {
         merkle.pop().unwrap();
     }
 
+    pub fn proof_of_work(header: &mut Blockheader) {
+        loop {
+            let hash = Chain::hash(header);
+            let slice = &hash[..header.difficulty as usize];
+            match slice.parse::<u32>() {
+                Ok(val) => {
+                    if val = 0 {
+                        println!("hash {}", hash);
+                        break;
+                    } else {
+                        hash.nonce += 1;
+                    }
+                },
+                Err(_) => {
+                    header.nonce += 1;
+                    continue;
+                }
+            }
+        };
+    }
 }
