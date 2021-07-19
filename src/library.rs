@@ -86,6 +86,7 @@ impl Chain {
             timestamp: time::now().to_timespec().sec,//converting in secconds
             nonce: 0,
             pre_hash: self.last_hash(),
+            merkle: String::new();
             difficulty: self.difficulty,
         }
         let reward_transaction = Transaction {
@@ -150,5 +151,20 @@ impl Chain {
                 }
             }
         };
+    }
+    pub fn hash<T: serde::Serialize>(item: &T) -> String {
+        let input_hash = serde_json::to_string(&item).unwrap();//json to string
+        let mut hasher = Sha256::default();
+        hasher.input(input.as_bytes());//converting to bytes
+        let res = hasher.result();
+        let res_vector = result.to_vec();//returns as hex
+        Chain::hex_to_string(vec_res.as_slice());
+    }
+    pub fn hex_to_string(vec_res: &[u8]) -> String { //bytes to string
+        let mut str = String::new();
+        for i in res_vec {
+            write!(&mut str, "{:x}", i).expect("unable to write");
+        }
+        str
     }
 }
