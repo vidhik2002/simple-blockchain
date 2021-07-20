@@ -81,7 +81,7 @@ impl Chain {
         true
     }
 
-    pub fn generate generate_block(&mut self) -> bool {
+    pub fn generate_block(&mut self) -> bool {
         let header = Blockheader{
             timestamp: time::now().to_timespec().sec,//converting in secconds
             nonce: 0,
@@ -125,7 +125,7 @@ impl Chain {
             //removing the last 2 hashes
             let mut hl = merkle.remove(0);
             let mut hll = merkle.remove(0);
-            hl.push_str(&mut h2);
+            hl.push_str(&mut h2);//pushing 2nd hash to first
             let new_hash = Chain::hash(&hl);
             merkle.push(new_hash);
         }

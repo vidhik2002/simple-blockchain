@@ -32,10 +32,50 @@ fn main() {
         println!("3> Alter Difficulty");
         println!("4> Change reward");
         println!("0> Exit");
-        println!("Enter choice");
+        print!("Enter choice");
         io::stdout().flush();//output emitted immediately
         choice.clear();
         io::stdin().read_lin(&mut choice);
         println!("");
+
+
+        match choice.trim().parse().unwrap() {
+            0 => {
+                println!("Exiting");
+                process::exit();
+            },
+            1 =>{
+                let mut sender = String::new():
+                let mut reciever = String::new():
+                let mut amount = String::new():
+                print!("input a sender address: ");
+                io::stdout().flush();//output emitted immediately
+                io::stdin().read_line(&mut sender);
+    
+                print!("input a reciever address: ");
+                io::stdout().flush();//output emitted immediately
+                io::stdin().read_line(&mut reciever);
+                
+                print!("input a amount: ");
+                io::stdout().flush();//output emitted immediately
+                io::stdin().read_line(&mut amount);
+            
+                let res = chain.new_transaction(
+                    sender.trim().to_string(),
+                    reciever.trim().to_string(),
+                    amount.parse().unwrap(), 
+                );
+
+                match res {
+                    true => print!("Transaction successful");
+                    false => print!("Transaction failed");
+                }
+            },
+            2 => {
+            },
+            0 =>
+            0 =>
+            0 =>
+        }
     }
 }
