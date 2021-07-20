@@ -72,10 +72,37 @@ fn main() {
                 }
             },
             2 => {
+                println!("Generating block ");
+                let res = chain.generate_block();
+                match res {
+                    true => print!("Update Successful");
+                    false => print!("Update Failed");
+                }
             },
-            0 =>
-            0 =>
-            0 =>
+            3 => {
+                let mut new_difficulty = String::new():
+                print!("input a sender  new difficulty: ");
+                io::stdout().flush();//output emitted immediately
+                io::stdin().read_line(&mut new_difficulty);
+                chain.update_difficulty(new_difficulty.trim().parse().unwrap());
+                match res {
+                    true => print!("Difficulty update Successful");
+                    false => print!("Difficulty update Failed");
+                }
+            },
+            4 => {
+                let mut new_reward = String::new():
+                print!("input a sender  new reward: ");
+                io::stdout().flush();//output emitted immediately
+                io::stdin().read_line(&mut new_reward);
+                chain.update_reward(new_reward.trim().parse().unwrap());
+                match res {
+                    true => print!("Reward update Successful");
+                    false => print!("Reward update Failed");
+                }
+
+            },
+            _ => println!("Invalid option");
         }
     }
 }
